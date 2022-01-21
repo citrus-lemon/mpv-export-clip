@@ -15,6 +15,10 @@ add this to `~/.config/mpv/input.conf`
 
 ```
 Ctrl+2 script-message export-loop-clip
+a script-message seek-ab-loop-a
+b script-message seek-ab-loop-b
+Ctrl+a script-message set-ab-loop-a
+Ctrl+b script-message set-ab-loop-b
 # add following for moving pointer faster
 Alt+RIGHT frame-step
 Alt+LEFT frame-back-step

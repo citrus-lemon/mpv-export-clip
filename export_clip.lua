@@ -44,3 +44,34 @@ function export_loop_clip()
   end
 end
 mp.register_script_message("export-loop-clip", export_loop_clip)
+
+function set_ab_loop_a()
+  local pos = mp.get_property_number("time-pos")
+  local a = mp.get_property_number("ab-loop-a")
+  mp.set_property_number("ab-loop-a", pos)
+  mp.osd_message('set A-B loop A: ' .. tostring(pos))
+end
+mp.register_script_message("set-ab-loop-a", set_ab_loop_a)
+
+function set_ab_loop_b()
+  local pos = mp.get_property_number("time-pos")
+  mp.set_property_number("ab-loop-b", pos)
+  mp.osd_message('set A-B loop B: ' .. tostring(pos))
+end
+mp.register_script_message("set-ab-loop-b", set_ab_loop_b)
+
+function seek_ab_loop_a()
+  local pos = mp.get_property_number("ab-loop-a")
+  if pos then
+    mp.set_property_number("time-pos", pos)
+  end
+end
+mp.register_script_message("seek-ab-loop-a", seek_ab_loop_a)
+
+function seek_ab_loop_b()
+  local pos = mp.get_property_number("ab-loop-b")
+  if pos then
+    mp.set_property_number("time-pos", pos)
+  end
+end
+mp.register_script_message("seek-ab-loop-b", seek_ab_loop_b)
