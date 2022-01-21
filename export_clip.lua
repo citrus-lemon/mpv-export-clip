@@ -34,7 +34,7 @@ function export_loop_clip()
     }
     local args = { args = cmd }
     local result = utils.subprocess(args)
-    if result["status"] == "0" then
+    if result["status"] == 0 then
       mp.msg.info('save clip ' .. outfile)
       mp.osd_message('save clip ' .. outfile)
     else
