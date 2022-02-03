@@ -28,7 +28,7 @@ function export_loop_clip()
       '-crf', '22',
       '-pix_fmt', 'yuv420p',
       '-filter_complex', 'scale=iw*min(1\\,min(1280/iw\\,720/ih)):-2',
-      '-map', '0',
+      -- '-map', '0',
       '-v', '16',
       outfile
     }
