@@ -1,23 +1,44 @@
 utils = require "mp.utils"
 
+-- test available filename
+function slow_start()
+  local basename = mp.get_property("filename"):gsub("%.([^%.]+)$", "")
+  local screenshot_folder = mp.get_property("screenshot-directory") or ""
+
+  function filename(idx)
+    return utils.join_path(
+      screenshot_folder,
+      basename .. '-' .. string.format("%04d",idx) .. '.mp4'
+    )
+  end
+
+  -- multiply
+  local inc = 1
+  while utils.file_info(filename(inc)) do
+    inc = inc * 2
+  end
+
+  -- narrowing
+  local lower_bound = math.floor(inc / 2)
+  while inc - lower_bound > 1 do
+    local mid = math.floor((inc + lower_bound) / 2)
+    local is_file = utils.file_info(filename(mid))
+    if is_file then
+      lower_bound = mid
+    else
+      inc = mid
+    end
+  end
+
+  return filename(inc)
+end
+
 function export_loop_clip()
   local a = mp.get_property_number("ab-loop-a")
   local b = mp.get_property_number("ab-loop-b")
-  local screenshot_folder = mp.get_property("screenshot-directory") or ""
   local path = mp.get_property("path")
-  local basename = mp.get_property("filename"):gsub("%.([^%.]+)$", "")
   if a and b then
-    local inc = 0
-    local outfile
-    repeat
-      local num = string.format("%04d",inc)
-      outfile = utils.join_path(
-        screenshot_folder,
-        basename .. '-' .. num .. '.mp4'
-      )
-      local is_file = utils.file_info(outfile)
-      inc = inc + 1
-    until (not is_file)
+    local outfile = slow_start()
     local cmd = {
       'ffmpeg',
       '-ss', tostring(a),
