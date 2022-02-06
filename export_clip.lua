@@ -41,14 +41,16 @@ function export_loop_clip()
     local outfile = slow_start()
     local cmd = {
       'ffmpeg',
+      'hide_banner',
       '-ss', tostring(a),
       '-i', path,
       '-t', tostring(b-a),
-      '-vcodec', 'libx264',
-      '-an', '-sn',
+      '-c:v', 'libx264',
       '-crf', '22',
       '-pix_fmt', 'yuv420p',
       '-filter_complex', 'scale=iw*min(1\\,min(1280/iw\\,720/ih)):-2',
+      '-an', '-sn',
+      '-map_metadata', '-1',
       -- '-map', '0',
       '-v', '16',
       outfile
