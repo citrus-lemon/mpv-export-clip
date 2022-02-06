@@ -52,7 +52,7 @@ function export_loop_clip()
       '-an', '-sn',
       '-map_metadata', '-1',
       -- '-map', '0',
-      '-v', '16',
+      '-v', 'error',
       outfile
     }
     local args = { args = cmd }
