@@ -41,7 +41,7 @@ function export_loop_clip()
     local outfile = slow_start()
     local cmd = {
       'ffmpeg',
-      'hide_banner',
+      '-hide_banner',
       '-ss', tostring(a),
       '-i', path,
       '-t', tostring(b-a),
