@@ -25,3 +25,9 @@ Alt+LEFT frame-back-step
 ```
 
 clip will be saved in `screenshot-directory` folder
+
+## Roadmap
+
+- [x] generate video clip from ab-loop
+- [ ] record clip time info into a file and able to recover
+- [ ] build an interface for browsing clips and useful operations
