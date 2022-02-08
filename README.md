@@ -1,6 +1,6 @@
 # mpv-export-clip
 
-a mpv script for clipping movie
+a mpv lua script to cut clips from video
 
 ## How to use
 
