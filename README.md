@@ -6,7 +6,7 @@ a mpv lua script to cut clips from video
 
 ```sh
 mkdir -p ~/.config/mpv/scripts
-git clone https://github.com/WindProphet/mpv-export-clip ~/.config/mpv/scripts/mpv-export-clip
+wget https://raw.githubusercontent.com/WindProphet/mpv-export-clip/master/export_clip.lua -O ~/.config/mpv/scripts/export_clip.lua
 ```
 
 and register function
