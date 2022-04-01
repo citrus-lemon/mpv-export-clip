@@ -40,6 +40,7 @@ function export_loop_clip()
   if a and b then
     local outfile = slow_start()
     local cmd = {
+      "run",
       "ffmpeg",
       "-ss", tostring(a),
       "-i", path,
@@ -56,14 +57,16 @@ function export_loop_clip()
       outfile
     }
     local args = { args = cmd }
-    local result = utils.subprocess(args)
-    if result["status"] == 0 then
-      mp.msg.info('save clip ' .. outfile)
-      mp.osd_message('save clip ' .. outfile)
-    else
-      mp.msg.info(result["error_string"] .. result["status"])
-      mp.osd_message("export loop clip error")
+    function cb(success, result, error)
+      if success then
+        mp.msg.info("save clip " .. outfile)
+        mp.osd_message("save clip " .. outfile)
+      else
+        mp.msg.info(error)
+        mp.osd_message("export loop clip error: " .. error)
+      end
     end
+    mp.command_native_async(cmd, cb)
   end
 end
 mp.register_script_message("export-loop-clip", export_loop_clip)
